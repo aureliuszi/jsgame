@@ -38,6 +38,11 @@ var myGameArea = {
         window.addEventListener('keyup', function (e) {
             myGameArea.key = false;
         })
+
+        window.addEventListener('touchmove', function (e) {
+            myGameArea.x = e.touches[0].screenX;
+            myGameArea.y = e.touches[0].screenY;
+        })
     }, 
     clear : function(){
        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -66,6 +71,11 @@ function updateGameArea() {
         myGamePiece.x = myGameArea.x;
         myGamePiece.y = myGameArea.y;        
     } 
+
+    if (myGameArea.touchX && myGameArea.touchY) {
+        myGamePiece.x = myGameArea.x;
+        myGamePiece.y = myGameArea.y; 
+    }
     if (myGameArea.key && myGameArea.key == 38) {myGamePiece.width += 1; }
     if (myGameArea.key && myGameArea.key == 40) {myGamePiece.width -= 1; }
     if (myGamePiece.width <= 0) {myGamePiece.width = 0.5; }
@@ -73,6 +83,8 @@ function updateGameArea() {
     if (myGameArea.key && myGameArea.key == 66) {myGamePiece.color = "blue"; }
     if (myGameArea.key && myGameArea.key == 82) {myGamePiece.color = "red"; }
     if (myGameArea.key && myGameArea.key == 89) {myGamePiece.color = "yellow"; }
+
+
     
     myGamePiece.update();
     
